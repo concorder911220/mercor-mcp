@@ -1,0 +1,22 @@
+{
+  "mappings": [
+    {
+      "event_type": "document_save",
+      "agent_config": {
+        "system_prompt_template": "document_extraction_prompt_template",
+        "allowed_tool_namespaces": ["extract", "dropbox"],
+        "max_iterations": 5
+      },
+      "priority": 100
+    },
+    {
+      "event_type": "chat_request",
+      "agent_config": {
+        "system_prompt_template": "accounting_general_prompt_template",
+        "allowed_tool_namespaces": ["dropbox", "outlook", "quickbooks", "extract"],
+        "max_iterations": 10
+      },
+      "priority": 10
+    }
+  ]
+}

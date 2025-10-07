@@ -1,0 +1,251 @@
+{
+  "type": "object",
+  "properties": {
+    "taxYear": {
+      "type": "number",
+      "description": "Tax year, e.g., 2010"
+    },
+    "reissuedStatement": {
+      "type": "boolean",
+      "description": "Indicates if statement is reissued"
+    },
+    "controlNumber": {
+      "type": "string",
+      "description": "Control number for the form"
+    },
+    "employer": {
+      "type": "object",
+      "properties": {
+        "employerIdentificationNumber": {
+          "type": "string",
+          "description": "Employer Identification Number (EIN)"
+        },
+        "employerName": {
+          "type": "string",
+          "description": "Employer's name"
+        },
+        "employerAddress": {
+          "type": "string",
+          "description": "Employer's address"
+        }
+      },
+      "required": [
+        "employerIdentificationNumber",
+        "employerName",
+        "employerAddress"
+      ],
+      "description": "Employer details"
+    },
+    "employee": {
+      "type": "object",
+      "properties": {
+        "socialSecurityNumber": {
+          "type": "string",
+          "description": "Employee's Social Security Number (SSN)"
+        },
+        "employeeName": {
+          "type": "string",
+          "description": "Employee's name"
+        },
+        "employeeAddress": {
+          "type": "string",
+          "description": "Employee's address"
+        }
+      },
+      "required": [
+        "socialSecurityNumber",
+        "employeeName",
+        "employeeAddress"
+      ],
+      "description": "Employee details"
+    },
+    "federalBoxes": {
+      "type": "object",
+      "properties": {
+        "wagesTipsOtherCompensation": {
+          "type": "number",
+          "description": "box 1"
+        },
+        "federalIncomeTaxWithheld": {
+          "type": "number",
+          "description": "box 2"
+        },
+        "socialSecurityWages": {
+          "type": "number",
+          "description": "box 3, watch anchor"
+        },
+        "socialSecurityTaxWithheld": {
+          "type": "number",
+          "description": "box 4"
+        },
+        "medicareWagesAndTips": {
+          "type": "number",
+          "description": "box 5, watch anchor"
+        },
+        "medicareTaxWithheld": {
+          "type": "number",
+          "description": "box 6"
+        },
+        "socialSecurityTips": {
+          "type": "number",
+          "description": "box 7, watch anchor"
+        },
+        "allocatedTips": {
+          "type": "number",
+          "description": "box 8"
+        },
+        "dependentCareBenefits": {
+          "type": "number",
+          "description": "box 10"
+        },
+        "nonqualifiedPlans": {
+          "type": "number",
+          "description": "box 11"
+        }
+      },
+      "required": [
+        "wagesTipsOtherCompensation",
+        "federalIncomeTaxWithheld",
+        "socialSecurityWages",
+        "socialSecurityTaxWithheld",
+        "medicareWagesAndTips",
+        "medicareTaxWithheld",
+        "socialSecurityTips",
+        "allocatedTips",
+        "dependentCareBenefits",
+        "nonqualifiedPlans"
+      ],
+      "description": "Federal tax details"
+    },
+    "box12Codes": {
+      "type": "object",
+      "properties": {
+        "code12a": {
+          "type": "string",
+          "description": "Code for box 12a"
+        },
+        "code12c": {
+          "type": "string",
+          "description": "Code for box 12c"
+        },
+        "amount12a": {
+          "type": "number",
+          "description": "Amount for box 12a"
+        },
+        "amount12b": {
+          "type": "number",
+          "description": "Amount for box 12b"
+        },
+        "amount12c": {
+          "type": "number",
+          "description": "Amount for box 12c"
+        },
+        "amount12d": {
+          "type": "number",
+          "description": "Amount for box 12d"
+        }
+      },
+      "required": [
+        "code12a",
+        "code12c",
+        "amount12a",
+        "amount12b",
+        "amount12c",
+        "amount12d"
+      ],
+      "description": "Box 12 codes and amounts"
+    },
+    "box13Checkboxes": {
+      "type": "object",
+      "properties": {
+        "statutoryEmployee": {
+          "type": "boolean",
+          "description": "1st box in a row"
+        },
+        "retirementPlan": {
+          "type": "boolean",
+          "description": "2nd box in a row"
+        },
+        "thirdPartySickPay": {
+          "type": "boolean",
+          "description": "3rd box in a row"
+        }
+      },
+      "required": [
+        "statutoryEmployee",
+        "retirementPlan",
+        "thirdPartySickPay"
+      ],
+      "description": "Box 13 checkboxes"
+    },
+    "states": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "State abbreviation"
+          },
+          "employerStateId": {
+            "type": "string",
+            "description": "Employer state ID number"
+          },
+          "stateWages": {
+            "type": "number",
+            "description": "State wages amount"
+          },
+          "stateIncomeTax": {
+            "type": "number",
+            "description": "State income tax amount"
+          }
+        },
+        "required": [
+          "state",
+          "employerStateId",
+          "stateWages",
+          "stateIncomeTax"
+        ]
+      },
+      "description": "State tax details"
+    },
+    "localities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "localityName": {
+            "type": "string",
+            "description": "Locality name"
+          },
+          "localWages": {
+            "type": "number",
+            "description": "Local wages amount"
+          },
+          "localIncomeTax": {
+            "type": "number",
+            "description": "Local income tax amount"
+          }
+        },
+        "required": [
+          "localityName",
+          "localWages",
+          "localIncomeTax"
+        ]
+      },
+      "description": "Local tax details"
+    }
+  },
+  "required": [
+    "taxYear",
+    "reissuedStatement",
+    "controlNumber",
+    "employer",
+    "employee",
+    "federalBoxes",
+    "box12Codes",
+    "box13Checkboxes",
+    "states",
+    "localities"
+  ]
+}

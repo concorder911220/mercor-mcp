@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "declaration": true,
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react",
+    "paths": {
+      "@rialto/design-tokens": ["./design-tokens/dist/index"],
+      "@rialto/theme": ["./theme/dist/index"]
+    },
+    "baseUrl": "."
+  }
+}

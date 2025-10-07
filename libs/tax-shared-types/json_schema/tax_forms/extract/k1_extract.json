@@ -1,0 +1,300 @@
+{
+    "type": "object",
+    "properties": {
+      "partnership": {
+        "type": "object",
+        "properties": {
+          "ein": {
+            "type": "string",
+            "description": "Employer Identification Number, format: XX-XXXXXXX"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the partnership"
+          },
+          "address": {
+            "type": "string",
+            "description": "Address of the partnership"
+          }
+        },
+        "required": [
+          "ein",
+          "name",
+          "address"
+        ],
+        "description": "Details of the partnership entity"
+      },
+      "partner": {
+        "type": "object",
+        "properties": {
+          "ssnTin": {
+            "type": "string",
+            "description": "Social Security or Tax Identification Number, masked format: ***-**-XXXX"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the partner"
+          },
+          "address": {
+            "type": "string",
+            "description": "Address of the partner"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Individual",
+              "Entity"
+            ],
+            "description": "Type of partner"
+          },
+          "partnerRole": {
+            "type": "string",
+            "description": "Role of the partner in the partnership"
+          },
+          "profitPct": {
+            "type": "object",
+            "properties": {
+              "begin": {
+                "type": "number",
+                "description": "Beginning profit percentage"
+              },
+              "end": {
+                "type": "number",
+                "description": "Ending profit percentage"
+              }
+            },
+            "required": [
+              "begin",
+              "end"
+            ],
+            "description": "Profit percentage details"
+          },
+          "lossPct": {
+            "type": "object",
+            "properties": {
+              "begin": {
+                "type": "number",
+                "description": "Beginning loss percentage"
+              },
+              "end": {
+                "type": "number",
+                "description": "Ending loss percentage"
+              }
+            },
+            "required": [
+              "begin",
+              "end"
+            ],
+            "description": "Loss percentage details"
+          },
+          "capitalPct": {
+            "type": "object",
+            "properties": {
+              "begin": {
+                "type": "number",
+                "description": "Beginning capital percentage"
+              },
+              "end": {
+                "type": "number",
+                "description": "Ending capital percentage"
+              }
+            },
+            "required": [
+              "begin",
+              "end"
+            ],
+            "description": "Capital percentage details"
+          },
+          "capitalAccount": {
+            "type": "object",
+            "properties": {
+              "beginning": {
+                "type": "number",
+                "description": "Beginning capital account balance"
+              },
+              "currentYearIncomeLoss": {
+                "type": "number",
+                "description": "Current year income or loss"
+              },
+              "withdrawalsDistributions": {
+                "type": "number",
+                "description": "Withdrawals or distributions amount"
+              },
+              "ending": {
+                "type": "number",
+                "description": "Ending capital account balance"
+              }
+            },
+            "required": [
+              "beginning",
+              "currentYearIncomeLoss",
+              "withdrawalsDistributions",
+              "ending"
+            ],
+            "description": "Capital account details"
+          }
+        },
+        "required": [
+          "ssnTin",
+          "name",
+          "address",
+          "type",
+          "partnerRole",
+          "profitPct",
+          "lossPct",
+          "capitalPct",
+          "capitalAccount"
+        ],
+        "description": "Details of the partner"
+      },
+      "k1Boxes": {
+        "type": "object",
+        "properties": {
+          "ordinaryBusinessIncomeLoss": {
+            "type": "number",
+            "description": "Ordinary business income or loss"
+          },
+          "interestIncome": {
+            "type": "number",
+            "description": "Interest income amount"
+          },
+          "netLongTermCapitalGain": {
+            "type": "number",
+            "description": "Net long-term capital gain"
+          },
+          "otherIncome": {
+            "type": "object",
+            "properties": {
+              "stakingIncome": {
+                "type": "number",
+                "description": "Staking income amount"
+              }
+            },
+            "required": [
+              "stakingIncome"
+            ],
+            "description": "Other income details"
+          },
+          "otherDeductions": {
+            "type": "object",
+            "properties": {
+              "portfolioDeductions": {
+                "type": "number",
+                "description": "Portfolio deductions amount"
+              }
+            },
+            "required": [
+              "portfolioDeductions"
+            ],
+            "description": "Other deductions details"
+          },
+          "selfEmploymentIncomeLoss": {
+            "type": "number",
+            "description": "Self-employment income or loss"
+          },
+          "taxExemptIncome": {
+            "type": "number",
+            "description": "Tax-exempt income amount"
+          },
+          "distributions": {
+            "type": "number",
+            "description": "Distributions amount"
+          },
+          "otherInformation": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "description": "Other information details"
+          },
+          "foreignTaxesPaid": {
+            "type": "number",
+            "description": "Foreign taxes paid amount"
+          }
+        },
+        "required": [
+          "ordinaryBusinessIncomeLoss",
+          "interestIncome",
+          "netLongTermCapitalGain",
+          "otherIncome",
+          "otherDeductions",
+          "selfEmploymentIncomeLoss",
+          "taxExemptIncome",
+          "distributions",
+          "otherInformation",
+          "foreignTaxesPaid"
+        ],
+        "description": "K-1 form box details"
+      },
+      "scheduleK3": {
+        "type": "object",
+        "properties": {
+          "foreignIncome": {
+            "type": "object",
+            "properties": {
+              "longTermCapitalGain": {
+                "type": "number",
+                "description": "Long-term capital gain from foreign income"
+              },
+              "otherIncomeStaking": {
+                "type": "number",
+                "description": "Other income from staking"
+              }
+            },
+            "required": [
+              "longTermCapitalGain",
+              "otherIncomeStaking"
+            ],
+            "description": "Foreign income details"
+          },
+          "deductions": {
+            "type": "object",
+            "properties": {
+              "portfolioDeductions": {
+                "type": "number",
+                "description": "Portfolio deductions amount"
+              }
+            },
+            "required": [
+              "portfolioDeductions"
+            ],
+            "description": "Deductions details"
+          }
+        },
+        "required": [
+          "foreignIncome",
+          "deductions"
+        ],
+        "description": "Schedule K-3 details"
+      },
+      "footnotes": {
+        "type": "object",
+        "properties": {
+          "portfolioIncomeTreatment": {
+            "type": "boolean",
+            "description": "Indicates if portfolio income is treated"
+          },
+          "subjectToNiit": {
+            "type": "boolean",
+            "description": "Indicates if subject to Net Investment Income Tax"
+          },
+          "ubtiGenerated": {
+            "type": "boolean",
+            "description": "Indicates if Unrelated Business Taxable Income is generated"
+          }
+        },
+        "required": [
+          "portfolioIncomeTreatment",
+          "subjectToNiit",
+          "ubtiGenerated"
+        ],
+        "description": "Footnotes related to the partnership"
+      }
+    },
+    "required": [
+      "partnership",
+      "partner",
+      "k1Boxes",
+      "scheduleK3",
+      "footnotes"
+    ]
+  }

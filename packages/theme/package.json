@@ -1,0 +1,19 @@
+{
+  "name": "@rialto/theme",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": { ".": { "import": "./dist/index.js", "types": "./dist/index.d.ts" } },
+  "files": ["dist"],
+  "scripts": { "build": "tsc -p tsconfig.json" },
+  "peerDependencies": {
+    "@mui/material": "^5",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "dependencies": {
+    "@rialto/design-tokens": "file:../design-tokens"
+  },
+  "devDependencies": { "typescript": "^5.5.4" }
+}

@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build:design": "cd packages/design-tokens && npm run build",
+    "build:theme": "cd packages/theme && npm run build",
+    "build:ui": "cd packages/ui && npm run build",
+    "build:frontend": "cd apps/frontend && npm run build",
+    "build:storybook": "npm run build-storybook",
+    "build:packages": "npm run build:design && npm run build:theme && npm run build:ui",
+    "build:all": "npm run build:design && npm run build:theme && npm run build:ui && npm run build:frontend && npm run build:storybook",
+    "dev:frontend": "cd apps/frontend && npm run dev",
+    "dev:ui": "cd packages/ui && npm run dev",
+    "dev:storybook": "cd apps/storybook && npm run storybook",
+    "dev:start": "npm run build:packages && npm run dev:frontend",
+    "dev:watch": "concurrently \"npm run dev:ui\" \"npm run dev:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.5.4"
+  }
+}

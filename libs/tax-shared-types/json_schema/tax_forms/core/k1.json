@@ -1,0 +1,317 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tax Form Schedule K-1",
+    "type": "object",
+    "properties": {
+      "taxYear": {
+        "type": "integer",
+        "description": "Tax year for this Schedule K-1",
+        "minimum": 1900,
+        "maximum": 9999
+      },
+      "formType": {
+        "type": "string",
+        "enum": ["1065", "1120S", "1041"],
+        "description": "Type of K-1: 1065 (Partnership), 1120S (S Corporation), or 1041 (Estate/Trust)"
+      },
+      "entity": {
+        "type": "object",
+        "properties": {
+          "ein": {
+            "type": "string",
+            "pattern": "^\\d{2}-\\d{7}$",
+            "description": "Entity's Employer Identification Number"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of entity"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {"type": "string"},
+              "city": {"type": "string"},
+              "state": {"type": "string", "maxLength": 2},
+              "zipCode": {"type": "string"},
+              "foreignCountry": {"type": "string"}
+            },
+            "required": ["street", "city"]
+          },
+          "publiclyTraded": {"type": "boolean"},
+          "irsCenter": {"type": "string"}
+        },
+        "required": ["ein", "name", "address"]
+      },
+      "partner": {
+        "type": "object",
+        "properties": {
+          "ssn": {
+            "type": "string",
+            "pattern": "^\\d{3}-\\d{2}-\\d{4}$|^\\d{2}-\\d{7}$",
+            "description": "Partner's SSN or EIN"
+          },
+          "name": {
+            "type": "string",
+            "description": "Partner's name"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {"type": "string"},
+              "city": {"type": "string"},
+              "state": {"type": "string", "maxLength": 2},
+              "zipCode": {"type": "string"},
+              "foreignCountry": {"type": "string"}
+            },
+            "required": ["street", "city"]
+          },
+          "partnerType": {
+            "type": "string",
+            "enum": ["general", "limited", "limited_liability"],
+            "description": "What type of partner"
+          },
+          "domestic": {"type": "boolean"},
+          "entityType": {
+            "type": "string",
+            "enum": ["individual", "corporation", "partnership", "exempt_organization", "estate_trust", "retirement_plan"],
+            "description": "If partner is an entity, what type"
+          }
+        },
+        "required": ["ssn", "name", "address"]
+      },
+      "ownership": {
+        "type": "object",
+        "properties": {
+          "profitSharingPercentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Partner's share of profit sharing %"
+          },
+          "lossSharingPercentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Partner's share of loss sharing %"
+          },
+          "capitalSharingPercentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Partner's share of capital sharing %"
+          },
+          "beginningCapitalAccount": {
+            "type": "number",
+            "description": "Beginning of year capital account"
+          },
+          "endingCapitalAccount": {
+            "type": "number",
+            "description": "End of year capital account"
+          }
+        }
+      },
+      "ordinaryBusinessIncome": {
+        "type": "object",
+        "properties": {
+          "ordinaryBusinessIncomeOrLoss": {
+            "type": "number",
+            "description": "Box 1: Ordinary business income (loss)"
+          },
+          "netRentalRealEstateIncomeOrLoss": {
+            "type": "number",
+            "description": "Box 2: Net rental real estate income (loss)"
+          },
+          "otherNetRentalIncomeOrLoss": {
+            "type": "number",
+            "description": "Box 3: Other net rental income (loss)"
+          },
+          "guaranteedPaymentsForServices": {
+            "type": "number",
+            "description": "Box 4a: Guaranteed payments for services"
+          },
+          "guaranteedPaymentsForCapital": {
+            "type": "number",
+            "description": "Box 4b: Guaranteed payments for capital"
+          },
+          "guaranteedPaymentsForOther": {
+            "type": "number",
+            "description": "Box 4c: Guaranteed payments for other"
+          },
+          "interestIncome": {
+            "type": "number",
+            "description": "Box 5: Interest income"
+          },
+          "dividendsQualified": {
+            "type": "number",
+            "description": "Box 6a: Qualified dividends"
+          },
+          "dividendsOrdinary": {
+            "type": "number",
+            "description": "Box 6b: Ordinary dividends"
+          },
+          "royalties": {
+            "type": "number",
+            "description": "Box 7: Royalties"
+          },
+          "netShortTermCapitalGainOrLoss": {
+            "type": "number",
+            "description": "Box 8: Net short-term capital gain (loss)"
+          },
+          "netLongTermCapitalGainOrLoss": {
+            "type": "number",
+            "description": "Box 9a: Net long-term capital gain (loss)"
+          },
+          "collectiblesGain": {
+            "type": "number",
+            "description": "Box 9b: Collectibles (28%) gain (loss)"
+          },
+          "unrecaptured1250Gain": {
+            "type": "number",
+            "description": "Box 9c: Unrecaptured section 1250 gain"
+          },
+          "netSection1231GainOrLoss": {
+            "type": "number",
+            "description": "Box 10: Net section 1231 gain (loss)"
+          }
+        }
+      },
+      "otherInformation": {
+        "type": "object",
+        "properties": {
+          "section179DeductionInformation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {"type": "string"},
+                "amount": {"type": "number"}
+              }
+            },
+            "description": "Box 11: Section 179 deduction"
+          },
+          "otherDeductions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {"type": "string"},
+                "description": {"type": "string"},
+                "amount": {"type": "number"}
+              }
+            },
+            "description": "Box 12: Other deductions"
+          }
+        }
+      },
+      "credits": {
+        "type": "object",
+        "properties": {
+          "creditRecapture": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {"type": "string"},
+                "amount": {"type": "number"}
+              }
+            },
+            "description": "Box 13: Credits"
+          },
+          "foreignTransactions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {"type": "string"},
+                "description": {"type": "string"},
+                "amount": {"type": "number"}
+              }
+            },
+            "description": "Box 14: Foreign transactions"
+          },
+          "alternativeMinimumTax": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {"type": "string"},
+                "description": {"type": "string"},
+                "amount": {"type": "number"}
+              }
+            },
+            "description": "Box 15: Alternative minimum tax (AMT) items"
+          },
+          "itemsAffectingShareholderBasis": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {"type": "string"},
+                "description": {"type": "string"},
+                "amount": {"type": "number"}
+              }
+            },
+            "description": "Box 16: Items affecting shareholder basis"
+          },
+          "otherInformation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {"type": "string"},
+                "description": {"type": "string"},
+                "amount": {"type": "number"}
+              }
+            },
+            "description": "Box 17: Other information"
+          }
+        }
+      },
+      "moreInformation": {
+        "type": "object",
+        "properties": {
+          "distributions": {
+            "type": "number",
+            "description": "Box 19: Distributions"
+          },
+          "otherInformation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {"type": "string"},
+                "description": {"type": "string"},
+                "amount": {"type": "number"}
+              }
+            },
+            "description": "Box 20: Other information"
+          }
+        }
+      },
+      "selfEmploymentEarnings": {
+        "type": "object",
+        "properties": {
+          "netEarningsFromSelfEmployment": {
+            "type": "number",
+            "description": "Net earnings (loss) from self-employment"
+          },
+          "grossFarmingOrFishingIncome": {
+            "type": "number",
+            "description": "Gross farming or fishing income"
+          }
+        }
+      },
+      "additionalInformation": {
+        "type": "object",
+        "properties": {
+          "corrected": {"type": "boolean"},
+          "amended": {"type": "boolean"},
+          "finalK1": {"type": "boolean"},
+          "scheduleB1": {"type": "boolean"},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "required": ["taxYear", "formType", "entity", "partner"],
+    "additionalProperties": false
+  }

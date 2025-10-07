@@ -1,0 +1,227 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tax Form W2",
+    "type": "object",
+    "properties": {
+      "taxYear": {
+        "type": "integer",
+        "description": "Tax year for this W2",
+        "minimum": 1900,
+        "maximum": 9999
+      },
+      "employer": {
+        "type": "object",
+        "properties": {
+          "ein": {
+            "type": "string",
+            "pattern": "^\\d{2}-\\d{7}$",
+            "description": "Employer Identification Number (XX-XXXXXXX format)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Employer name, address, and ZIP code"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {"type": "string"},
+              "city": {"type": "string"},
+              "state": {"type": "string", "maxLength": 2},
+              "zipCode": {"type": "string"}
+            },
+            "required": ["street", "city", "state", "zipCode"]
+          }
+        },
+        "required": ["ein", "name", "address"]
+      },
+      "employee": {
+        "type": "object",
+        "properties": {
+          "ssn": {
+            "type": "string",
+            "pattern": "^\\d{3}-\\d{2}-\\d{4}$",
+            "description": "Employee Social Security Number (XXX-XX-XXXX format)"
+          },
+          "firstName": {"type": "string"},
+          "middleName": {"type": "string"},
+          "lastName": {"type": "string"},
+          "suffix": {"type": "string"},
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {"type": "string"},
+              "city": {"type": "string"},
+              "state": {"type": "string", "maxLength": 2},
+              "zipCode": {"type": "string"}
+            },
+            "required": ["street", "city", "state", "zipCode"]
+          }
+        },
+        "required": ["ssn", "firstName", "lastName", "address"]
+      },
+      "controlNumber": {
+        "type": "string",
+        "description": "Control number (optional employer use)"
+      },
+      "wages": {
+        "type": "object",
+        "properties": {
+          "wagesAndTips": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "description": "Box 1: Wages, tips, other compensation"
+          },
+          "federalIncomeTaxWithheld": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "description": "Box 2: Federal income tax withheld"
+          },
+          "socialSecurityWages": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "description": "Box 3: Social security wages"
+          },
+          "socialSecurityTaxWithheld": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "description": "Box 4: Social security tax withheld"
+          },
+          "medicareWages": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "description": "Box 5: Medicare wages and tips"
+          },
+          "medicareTaxWithheld": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "description": "Box 6: Medicare tax withheld"
+          },
+          "socialSecurityTips": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "description": "Box 7: Social security tips"
+          },
+          "allocatedTips": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "description": "Box 8: Allocated tips"
+          },
+          "dependentCareBenefits": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "description": "Box 10: Dependent care benefits"
+          },
+          "nonqualifiedPlans": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "description": "Box 11: Nonqualified plans"
+          }
+        }
+      },
+      "codes": {
+        "type": "object",
+        "properties": {
+          "box12": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "maxLength": 2,
+                  "description": "Two-letter code (A-Z, AA-EE, etc.)"
+                },
+                "amount": {
+                  "type": "number",
+                  "multipleOf": 0.01
+                }
+              },
+              "required": ["code", "amount"]
+            },
+            "maxItems": 4,
+            "description": "Box 12: Codes A-D with amounts"
+          },
+          "box13": {
+            "type": "object",
+            "properties": {
+              "statutoryEmployee": {"type": "boolean"},
+              "retirementPlan": {"type": "boolean"},
+              "thirdPartySickPay": {"type": "boolean"}
+            },
+            "description": "Box 13: Checkboxes"
+          },
+          "box14": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {"type": "string"},
+                "amount": {
+                  "type": "number",
+                  "multipleOf": 0.01
+                }
+              },
+              "required": ["description"]
+            },
+            "description": "Box 14: Other information"
+          }
+        }
+      },
+      "state": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "stateAbbreviation": {
+              "type": "string",
+              "maxLength": 2,
+              "description": "Box 15: State abbreviation"
+            },
+            "employerStateId": {
+              "type": "string",
+              "description": "Box 15: Employer's state ID number"
+            },
+            "stateWages": {
+              "type": "number",
+              "multipleOf": 0.01,
+              "description": "Box 16: State wages, tips, etc."
+            },
+            "stateIncomeTax": {
+              "type": "number",
+              "multipleOf": 0.01,
+              "description": "Box 17: State income tax"
+            },
+            "localWages": {
+              "type": "number",
+              "multipleOf": 0.01,
+              "description": "Box 18: Local wages, tips, etc."
+            },
+            "localIncomeTax": {
+              "type": "number",
+              "multipleOf": 0.01,
+              "description": "Box 19: Local income tax"
+            },
+            "localityName": {
+              "type": "string",
+              "description": "Box 20: Locality name"
+            }
+          },
+          "required": ["stateAbbreviation"]
+        },
+        "maxItems": 2,
+        "description": "State and local tax information (up to 2 states)"
+      },
+      "additionalInformation": {
+        "type": "object",
+        "properties": {
+          "correctedW2": {"type": "boolean"},
+          "voidW2": {"type": "boolean"},
+          "thirdPartyNotification": {"type": "boolean"},
+          "householdEmployee": {"type": "boolean"},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "required": ["taxYear", "employer", "employee", "wages"],
+    "additionalProperties": false
+  }

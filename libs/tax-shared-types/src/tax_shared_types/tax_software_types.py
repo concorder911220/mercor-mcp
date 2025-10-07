@@ -1,0 +1,11 @@
+from enum import Enum
+
+class TaxSoftwareType(str, Enum):
+    # Tax Prep Software
+    DRAKE_TAX = "DRAKE_TAX"
+    INTUIT_PRO_SERIES = "INTUIT_PRO_SERIES"
+    INTUIT_LACERTE_TAX = "INTUIT_LACERTE_TAX"
+    ULTRA_TAX_SOFTWARE = "ULTRA_TAX_SOFTWARE"
+    ATX = "ATX"
+    CCH_AXCESS_TAX = "CCH_AXCESS_TAX"
+    CCH_PRO_SYSTEMS_FX_TAX = "CCH_PRO_SYSTEMS_FX_TAX"

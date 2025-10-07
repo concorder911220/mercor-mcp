@@ -1,0 +1,246 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tax Form 1099-DIV",
+    "type": "object",
+    "properties": {
+      "taxYear": {
+        "type": "integer",
+        "description": "Tax year for this 1099-DIV",
+        "minimum": 1900,
+        "maximum": 9999
+      },
+      "payer": {
+        "type": "object",
+        "properties": {
+          "tin": {
+            "type": "string",
+            "pattern": "^\\d{2}-\\d{7}$|^\\d{3}-\\d{2}-\\d{4}$",
+            "description": "Payer's TIN (EIN format XX-XXXXXXX or SSN format XXX-XX-XXXX)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Payer's name"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {"type": "string"},
+              "city": {"type": "string"},
+              "state": {"type": "string", "maxLength": 2},
+              "zipCode": {"type": "string"}
+            },
+            "required": ["street", "city", "state", "zipCode"]
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Payer's telephone number"
+          }
+        },
+        "required": ["tin", "name", "address"]
+      },
+      "recipient": {
+        "type": "object",
+        "properties": {
+          "tin": {
+            "type": "string",
+            "pattern": "^\\d{3}-\\d{2}-\\d{4}$|^\\d{2}-\\d{7}$",
+            "description": "Recipient's TIN (SSN format XXX-XX-XXXX or EIN format XX-XXXXXXX)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Recipient's name"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {"type": "string"},
+              "city": {"type": "string"},
+              "state": {"type": "string", "maxLength": 2},
+              "zipCode": {"type": "string"},
+              "foreignCountry": {"type": "string"}
+            },
+            "required": ["street", "city"]
+          }
+        },
+        "required": ["tin", "name", "address"]
+      },
+      "accountNumber": {
+        "type": "string",
+        "description": "Account number (if required by payer)"
+      },
+      "dividends": {
+        "type": "object",
+        "properties": {
+          "totalOrdinaryDividends": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 1a: Total ordinary dividends"
+          },
+          "qualifiedDividends": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 1b: Qualified dividends"
+          },
+          "totalCapitalGainDistributions": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 2a: Total capital gain distributions"
+          },
+          "unrecaptured1250Gain": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 2b: Unrecaptured section 1250 gain"
+          },
+          "section1202Gain": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 2c: Section 1202 gain"
+          },
+          "collectiblesGain": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 2d: Collectibles (28%) gain"
+          },
+          "nondividendDistributions": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 3: Nondividend distributions"
+          },
+          "federalIncomeTaxWithheld": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 4: Federal income tax withheld"
+          },
+          "section199ADividends": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 5: Section 199A dividends"
+          },
+          "investmentExpenses": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 6: Investment expenses"
+          },
+          "foreignTaxPaid": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 7: Foreign tax paid"
+          },
+          "foreignCountryOrPossession": {
+            "type": "string",
+            "description": "Box 8: Foreign country or U.S. possession"
+          },
+          "cashLiquidationDistributions": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 9: Cash liquidation distributions"
+          },
+          "noncashLiquidationDistributions": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 10: Noncash liquidation distributions"
+          },
+          "exemptInterestDividends": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 11: Exempt-interest dividends"
+          },
+          "specifiedPrivateActivityBondInterest": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 12: Specified private activity bond interest dividends"
+          }
+        }
+      },
+      "state": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "stateNumber": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99,
+              "description": "State identification number"
+            },
+            "stateAbbreviation": {
+              "type": "string",
+              "maxLength": 2,
+              "description": "State abbreviation"
+            },
+            "payerStateNumber": {
+              "type": "string",
+              "description": "Payer's state identification number"
+            },
+            "stateTaxWithheld": {
+              "type": "number",
+              "multipleOf": 0.01,
+              "minimum": 0,
+              "description": "State tax withheld"
+            },
+            "stateDistribution": {
+              "type": "number",
+              "multipleOf": 0.01,
+              "minimum": 0,
+              "description": "State distribution"
+            }
+          },
+          "required": ["stateNumber", "stateAbbreviation"]
+        },
+        "maxItems": 2,
+        "description": "State tax information (up to 2 states)"
+      },
+      "additionalInformation": {
+        "type": "object",
+        "properties": {
+          "corrected": {
+            "type": "boolean",
+            "description": "Check if this is a corrected form"
+          },
+          "void": {
+            "type": "boolean",
+            "description": "Check if this form is void"
+          },
+          "fatca": {
+            "type": "boolean",
+            "description": "FATCA filing requirement"
+          },
+          "secondTinNotification": {
+            "type": "boolean",
+            "description": "2nd TIN notification"
+          },
+          "directSalesIndicator": {
+            "type": "string",
+            "maxLength": 1,
+            "description": "Direct sales indicator (if applicable)"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes or comments"
+          }
+        }
+      },
+      "cusip": {
+        "type": "string",
+        "pattern": "^[0-9A-Z]{9}$",
+        "description": "CUSIP number for the security (if applicable)"
+      }
+    },
+    "required": ["taxYear", "payer", "recipient", "dividends"],
+    "additionalProperties": false
+  }

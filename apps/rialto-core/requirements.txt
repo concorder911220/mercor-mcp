@@ -1,0 +1,67 @@
+# Core FastAPI and Web Framework
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+python-multipart==0.0.20
+
+# Database and ORM
+sqlalchemy==2.0.41
+psycopg2-binary==2.9.10
+alembic==1.16.4
+asyncpg==0.30.0
+
+# Data Validation and Serialization
+pydantic==2.11.7
+pydantic-settings==2.10.1
+email-validator==2.2.0
+
+# Shared types
+-e ../../libs/rialto-shared-types
+-e ../../libs/tax-shared-types
+
+# Security
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.20
+PyJWT==2.10.1
+bcrypt==4.1.2
+
+
+# Development and Testing (optional)
+pytest==8.4.1
+pytest-asyncio==1.1.0
+httpx==0.28.1
+black==25.1.0
+isort==6.0.1
+flake8==7.3.0
+
+# Monitoring and Logging (optional)
+sentry-sdk[fastapi]==2.33.1
+structlog==25.4.0
+
+# Caching (optional)
+# redis==5.0.1
+# hiredis==2.2.3
+
+# Rate Limiting (optional)
+slowapi==0.1.9
+
+# Documentation and API Tools
+markdown==3.8.2
+
+# File handling
+aiofiles==24.1.0
+python-magic==0.4.27
+
+# HTTP Client (for external APIs)
+aiohttp==3.12.14
+requests==2.32.5
+
+# AWS S3 Integration
+boto3==1.39.15
+botocore==1.39.15
+
+# Date and Time utilities
+python-dateutil==2.9.0.post0
+
+# Auth
+PyJWT==2.10.1 

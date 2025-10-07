@@ -1,0 +1,4 @@
+# Core dependencies for rialto-shared-types
+pydantic>=2.11.0,<3.0.0
+pydantic-settings>=2.10.0,<3.0.0
+email-validator>=2.2.0,<3.0.0

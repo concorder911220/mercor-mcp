@@ -1,0 +1,228 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tax Form1099-INT",
+    "type": "object",
+    "properties": {
+      "taxYear": {
+        "type": "integer",
+        "description": "Tax year for this 1099-INT",
+        "minimum": 1900,
+        "maximum": 9999
+      },
+      "payer": {
+        "type": "object",
+        "properties": {
+          "tin": {
+            "type": "string",
+            "pattern": "^\\d{2}-\\d{7}$|^\\d{3}-\\d{2}-\\d{4}$",
+            "description": "Payer's TIN (EIN format XX-XXXXXXX or SSN format XXX-XX-XXXX)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Payer's name"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {"type": "string"},
+              "city": {"type": "string"},
+              "state": {"type": "string", "maxLength": 2},
+              "zipCode": {"type": "string"}
+            },
+            "required": ["street", "city", "state", "zipCode"]
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Payer's telephone number"
+          }
+        },
+        "required": ["tin", "name", "address"]
+      },
+      "recipient": {
+        "type": "object",
+        "properties": {
+          "tin": {
+            "type": "string",
+            "pattern": "^\\d{3}-\\d{2}-\\d{4}$|^\\d{2}-\\d{7}$",
+            "description": "Recipient's TIN (SSN format XXX-XX-XXXX or EIN format XX-XXXXXXX)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Recipient's name"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {"type": "string"},
+              "city": {"type": "string"},
+              "state": {"type": "string", "maxLength": 2},
+              "zipCode": {"type": "string"},
+              "foreignCountry": {"type": "string"}
+            },
+            "required": ["street", "city"]
+          }
+        },
+        "required": ["tin", "name", "address"]
+      },
+      "accountNumber": {
+        "type": "string",
+        "description": "Account number (if required by payer)"
+      },
+      "interest": {
+        "type": "object",
+        "properties": {
+          "interestIncome": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 1: Interest income"
+          },
+          "earlyWithdrawalPenalty": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 2: Early withdrawal penalty"
+          },
+          "interestOnUSSavingsBondsAndTreasuryObligations": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 3: Interest on U.S. Savings Bonds and Treasury obligations"
+          },
+          "federalIncomeTaxWithheld": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 4: Federal income tax withheld"
+          },
+          "investmentExpenses": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 5: Investment expenses"
+          },
+          "foreignTaxPaid": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 6: Foreign tax paid"
+          },
+          "foreignCountryOrPossession": {
+            "type": "string",
+            "description": "Box 7: Foreign country or U.S. possession"
+          },
+          "taxExemptInterest": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 8: Tax-exempt interest"
+          },
+          "specifiedPrivateActivityBondInterest": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 9: Specified private activity bond interest"
+          },
+          "marketDiscount": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 10: Market discount"
+          },
+          "bondPremium": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 11: Bond premium"
+          },
+          "bondPremiumOnTreasuryObligations": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 12: Bond premium on Treasury obligations"
+          },
+          "bondPremiumOnTaxExemptBond": {
+            "type": "number",
+            "multipleOf": 0.01,
+            "minimum": 0,
+            "description": "Box 13: Bond premium on tax-exempt bond"
+          }
+        }
+      },
+      "state": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "stateNumber": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99,
+              "description": "State identification number"
+            },
+            "stateAbbreviation": {
+              "type": "string",
+              "maxLength": 2,
+              "description": "State abbreviation"
+            },
+            "payerStateNumber": {
+              "type": "string",
+              "description": "Payer's state identification number"
+            },
+            "stateTaxWithheld": {
+              "type": "number",
+              "multipleOf": 0.01,
+              "minimum": 0,
+              "description": "State tax withheld"
+            },
+            "stateIncome": {
+              "type": "number",
+              "multipleOf": 0.01,
+              "minimum": 0,
+              "description": "State income"
+            }
+          },
+          "required": ["stateNumber", "stateAbbreviation"]
+        },
+        "maxItems": 2,
+        "description": "State tax information (up to 2 states)"
+      },
+      "additionalInformation": {
+        "type": "object",
+        "properties": {
+          "corrected": {
+            "type": "boolean",
+            "description": "Check if this is a corrected form"
+          },
+          "void": {
+            "type": "boolean",
+            "description": "Check if this form is void"
+          },
+          "fatca": {
+            "type": "boolean",
+            "description": "FATCA filing requirement"
+          },
+          "secondTinNotification": {
+            "type": "boolean",
+            "description": "2nd TIN notification"
+          },
+          "directSalesIndicator": {
+            "type": "string",
+            "maxLength": 1,
+            "description": "Direct sales indicator (if applicable)"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes or comments"
+          }
+        }
+      },
+      "cusip": {
+        "type": "string",
+        "pattern": "^[0-9A-Z]{9}$",
+        "description": "CUSIP number for the security (if applicable)"
+      }
+    },
+    "required": ["taxYear", "payer", "recipient", "interest"],
+    "additionalProperties": false
+  }

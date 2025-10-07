@@ -1,0 +1,527 @@
+{
+    "type": "object",
+    "properties": {
+      "payer": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Payer's full name"
+          },
+          "federal_id": {
+            "type": "string",
+            "description": "Payer's federal ID number"
+          },
+          "address": {
+            "type": "string",
+            "description": "Payer's address"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Payer's contact phone number"
+          }
+        },
+        "required": [
+          "name",
+          "federal_id",
+          "address",
+          "phone"
+        ],
+        "description": "Payer information"
+      },
+      "recipient": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Recipient's full name"
+          },
+          "taxpayer_id": {
+            "type": "string",
+            "description": "Recipient's taxpayer ID"
+          },
+          "address": {
+            "type": "string",
+            "description": "Recipient's address"
+          },
+          "account_number": {
+            "type": "string",
+            "description": "Recipient's account number"
+          }
+        },
+        "required": [
+          "name",
+          "taxpayer_id",
+          "address",
+          "account_number"
+        ],
+        "description": "Recipient information"
+      },
+      "forms": {
+        "type": "object",
+        "properties": {
+          "1099-DIV": {
+            "type": "object",
+            "properties": {
+              "1a_total_ordinary_dividends": {
+                "type": "number",
+                "description": "Total ordinary dividends"
+              },
+              "1b_qualified_dividends": {
+                "type": "number",
+                "description": "Qualified dividends"
+              },
+              "2a_total_capital_gain_distributions": {
+                "type": "number",
+                "description": "Total capital gain distributions"
+              },
+              "2b_unrecaptured_sec1250_gain": {
+                "type": "number",
+                "description": "Unrecaptured Section 1250 gain"
+              },
+              "2c_section1202_gain": {
+                "type": "number",
+                "description": "Section 1202 gain"
+              },
+              "2d_collectibles_28pct_gain": {
+                "type": "number",
+                "description": "Collectibles 28% gain"
+              },
+              "3_nondividend_distributions": {
+                "type": "number",
+                "description": "Nondividend distributions"
+              },
+              "4_federal_income_tax_withheld": {
+                "type": "number",
+                "description": "Federal income tax withheld"
+              },
+              "5_section_199A_dividends": {
+                "type": "number",
+                "description": "Section 199A dividends"
+              },
+              "6_investment_expenses": {
+                "type": "number",
+                "description": "Investment expenses"
+              },
+              "7_foreign_tax_paid": {
+                "type": "number",
+                "description": "Foreign tax paid"
+              },
+              "8_foreign_country": {
+                "type": "string",
+                "description": "Foreign country name"
+              },
+              "9_cash_liquidation_distributions": {
+                "type": "number",
+                "description": "Cash liquidation distributions"
+              },
+              "10_noncash_liquidation_distributions": {
+                "type": "number",
+                "description": "Noncash liquidation distributions"
+              },
+              "12_exempt_interest_dividends": {
+                "type": "number",
+                "description": "Exempt interest dividends"
+              },
+              "13_specified_private_activity_bond_interest": {
+                "type": "number",
+                "description": "Specified private activity bond interest"
+              },
+              "14_state": {
+                "type": "string",
+                "description": "State name"
+              },
+              "15_state_id_number": {
+                "type": "string",
+                "description": "State ID number"
+              },
+              "16_state_tax_withheld": {
+                "type": "number",
+                "description": "State tax withheld"
+              }
+            },
+            "required": [
+              "1a_total_ordinary_dividends",
+              "1b_qualified_dividends",
+              "2a_total_capital_gain_distributions",
+              "2b_unrecaptured_sec1250_gain",
+              "2c_section1202_gain",
+              "2d_collectibles_28pct_gain",
+              "3_nondividend_distributions",
+              "4_federal_income_tax_withheld",
+              "5_section_199A_dividends",
+              "6_investment_expenses",
+              "7_foreign_tax_paid",
+              "8_foreign_country",
+              "9_cash_liquidation_distributions",
+              "10_noncash_liquidation_distributions",
+              "12_exempt_interest_dividends",
+              "13_specified_private_activity_bond_interest",
+              "14_state",
+              "15_state_id_number",
+              "16_state_tax_withheld"
+            ],
+            "description": "1099-DIV form details"
+          },
+          "1099-INT": {
+            "type": "object",
+            "properties": {
+              "1_interest_income": {
+                "type": "number",
+                "description": "Interest income"
+              },
+              "3_us_savings_bond_treasury_interest": {
+                "type": "number",
+                "description": "US savings bond treasury interest"
+              },
+              "4_federal_income_tax_withheld": {
+                "type": "number",
+                "description": "Federal income tax withheld"
+              },
+              "5_investment_expenses": {
+                "type": "number",
+                "description": "Investment expenses"
+              },
+              "6_foreign_tax_paid": {
+                "type": "number",
+                "description": "Foreign tax paid"
+              },
+              "7_foreign_country": {
+                "type": "string",
+                "description": "Foreign country name"
+              },
+              "8_tax_exempt_interest": {
+                "type": "number",
+                "description": "Tax-exempt interest"
+              },
+              "9_private_activity_bond_interest": {
+                "type": "number",
+                "description": "Private activity bond interest"
+              },
+              "10_market_discount": {
+                "type": "number",
+                "description": "Market discount"
+              },
+              "11_bond_premium": {
+                "type": "number",
+                "description": "Bond premium"
+              },
+              "12_bond_premium_treasury": {
+                "type": "number",
+                "description": "Bond premium treasury"
+              },
+              "13_bond_premium_tax_exempt": {
+                "type": "number",
+                "description": "Bond premium tax-exempt"
+              },
+              "14_tax_exempt_cusip": {
+                "type": "string",
+                "description": "Tax-exempt CUSIP"
+              },
+              "15_state": {
+                "type": "string",
+                "description": "State name"
+              },
+              "16_state_id_number": {
+                "type": "string",
+                "description": "State ID number"
+              },
+              "17_state_tax_withheld": {
+                "type": "number",
+                "description": "State tax withheld"
+              }
+            },
+            "required": [
+              "1_interest_income",
+              "3_us_savings_bond_treasury_interest",
+              "4_federal_income_tax_withheld",
+              "5_investment_expenses",
+              "6_foreign_tax_paid",
+              "7_foreign_country",
+              "8_tax_exempt_interest",
+              "9_private_activity_bond_interest",
+              "10_market_discount",
+              "11_bond_premium",
+              "12_bond_premium_treasury",
+              "13_bond_premium_tax_exempt",
+              "14_tax_exempt_cusip",
+              "15_state",
+              "16_state_id_number",
+              "17_state_tax_withheld"
+            ],
+            "description": "1099-INT form details"
+          },
+          "1099-B": {
+            "type": "object",
+            "properties": {
+              "short_term": {
+                "type": "object",
+                "properties": {
+                  "proceeds": {
+                    "type": "number",
+                    "description": "Proceeds from transactions"
+                  },
+                  "cost_basis": {
+                    "type": "number",
+                    "description": "Cost basis of transactions"
+                  },
+                  "gain_loss": {
+                    "type": "number",
+                    "description": "Gain or loss from transactions"
+                  },
+                  "federal_tax_withheld": {
+                    "type": "number",
+                    "description": "Federal tax withheld"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "State name"
+                  },
+                  "state_id_number": {
+                    "type": "string",
+                    "description": "State ID number"
+                  },
+                  "state_tax_withheld": {
+                    "type": "number",
+                    "description": "State tax withheld"
+                  }
+                },
+                "required": [
+                  "proceeds",
+                  "cost_basis",
+                  "gain_loss",
+                  "federal_tax_withheld",
+                  "state",
+                  "state_id_number",
+                  "state_tax_withheld"
+                ],
+                "description": "Short-term transactions"
+              },
+              "long_term": {
+                "type": "object",
+                "properties": {
+                  "proceeds": {
+                    "type": "number",
+                    "description": "Proceeds from transactions"
+                  },
+                  "cost_basis": {
+                    "type": "number",
+                    "description": "Cost basis of transactions"
+                  },
+                  "gain_loss": {
+                    "type": "number",
+                    "description": "Gain or loss from transactions"
+                  },
+                  "federal_tax_withheld": {
+                    "type": "number",
+                    "description": "Federal tax withheld"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "State name"
+                  },
+                  "state_id_number": {
+                    "type": "string",
+                    "description": "State ID number"
+                  },
+                  "state_tax_withheld": {
+                    "type": "number",
+                    "description": "State tax withheld"
+                  }
+                },
+                "required": [
+                  "proceeds",
+                  "cost_basis",
+                  "gain_loss",
+                  "federal_tax_withheld",
+                  "state",
+                  "state_id_number",
+                  "state_tax_withheld"
+                ],
+                "description": "Long-term transactions"
+              }
+            },
+            "required": [
+              "short_term",
+              "long_term"
+            ],
+            "description": "1099-B form details"
+          },
+          "1099-MISC": {
+            "type": "object",
+            "properties": {
+              "1_rents": {
+                "type": "number",
+                "description": "Rents received"
+              },
+              "2_royalties": {
+                "type": "number",
+                "description": "Royalties received"
+              },
+              "3_other_income": {
+                "type": "number",
+                "description": "Other income received"
+              },
+              "4_federal_income_tax_withheld": {
+                "type": "number",
+                "description": "Federal income tax withheld"
+              },
+              "5_fishing_boat_proceeds": {
+                "type": "number",
+                "description": "Fishing boat proceeds"
+              },
+              "6_medical_and_healthcare_payments": {
+                "type": "number",
+                "description": "Medical and healthcare payments"
+              },
+              "7_nonemployee_compensation": {
+                "type": "number",
+                "description": "Nonemployee compensation"
+              },
+              "8_substitute_payments_in_lieu": {
+                "type": "number",
+                "description": "Substitute payments in lieu"
+              },
+              "9_crop_insurance_proceeds": {
+                "type": "number",
+                "description": "Crop insurance proceeds"
+              },
+              "10_gross_proceeds_to_attorney": {
+                "type": "number",
+                "description": "Gross proceeds to attorney"
+              },
+              "12_section409A_income": {
+                "type": "number",
+                "description": "Section 409A income"
+              },
+              "14_nonqualified_deferred_comp": {
+                "type": "number",
+                "description": "Nonqualified deferred compensation"
+              },
+              "15_state": {
+                "type": "string",
+                "description": "State name"
+              },
+              "16_state_id_number": {
+                "type": "string",
+                "description": "State ID number"
+              },
+              "17_state_tax_withheld": {
+                "type": "number",
+                "description": "State tax withheld"
+              }
+            },
+            "required": [
+              "1_rents",
+              "2_royalties",
+              "3_other_income",
+              "4_federal_income_tax_withheld",
+              "5_fishing_boat_proceeds",
+              "6_medical_and_healthcare_payments",
+              "7_nonemployee_compensation",
+              "8_substitute_payments_in_lieu",
+              "9_crop_insurance_proceeds",
+              "10_gross_proceeds_to_attorney",
+              "12_section409A_income",
+              "14_nonqualified_deferred_comp",
+              "15_state",
+              "16_state_id_number",
+              "17_state_tax_withheld"
+            ],
+            "description": "1099-MISC form details"
+          },
+          "1099-OID": {
+            "type": "object",
+            "properties": {
+              "1_original_issue_discount": {
+                "type": "number",
+                "description": "Original issue discount"
+              },
+              "2_other_periodic_interest": {
+                "type": "number",
+                "description": "Other periodic interest"
+              },
+              "3_early_withdrawal_penalty": {
+                "type": "number",
+                "description": "Early withdrawal penalty"
+              },
+              "4_federal_income_tax_withheld": {
+                "type": "number",
+                "description": "Federal income tax withheld"
+              },
+              "5_market_discount": {
+                "type": "number",
+                "description": "Market discount"
+              },
+              "6_acquisition_premium": {
+                "type": "number",
+                "description": "Acquisition premium"
+              },
+              "7_description": {
+                "type": "string",
+                "description": "Description of the item"
+              },
+              "8_original_issue_discount_on_us_treasury": {
+                "type": "number",
+                "description": "OID on US Treasury"
+              },
+              "9_investment_expenses": {
+                "type": "number",
+                "description": "Investment expenses"
+              },
+              "10_bond_premium": {
+                "type": "number",
+                "description": "Bond premium"
+              },
+              "11_tax_exempt_oid": {
+                "type": "number",
+                "description": "Tax-exempt OID"
+              },
+              "12_state": {
+                "type": "string",
+                "description": "State name"
+              },
+              "13_state_id_number": {
+                "type": "string",
+                "description": "State ID number"
+              },
+              "14_state_tax_withheld": {
+                "type": "number",
+                "description": "State tax withheld"
+              }
+            },
+            "required": [
+              "1_original_issue_discount",
+              "2_other_periodic_interest",
+              "3_early_withdrawal_penalty",
+              "4_federal_income_tax_withheld",
+              "5_market_discount",
+              "6_acquisition_premium",
+              "7_description",
+              "8_original_issue_discount_on_us_treasury",
+              "9_investment_expenses",
+              "10_bond_premium",
+              "11_tax_exempt_oid",
+              "12_state",
+              "13_state_id_number",
+              "14_state_tax_withheld"
+            ],
+            "description": "1099-OID form details"
+          }
+        },
+        "required": [
+          "1099-DIV",
+          "1099-INT",
+          "1099-B",
+          "1099-MISC",
+          "1099-OID"
+        ],
+        "description": "Tax forms information"
+      }
+    },
+    "required": [
+      "payer",
+      "recipient",
+      "forms"
+    ]
+  }
